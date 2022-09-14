@@ -1,7 +1,6 @@
 import React from "react"
 import Dice from "./Dice"
-
-
+import img from "./winner.png"
 function newDice(arr) {
   arr = []
   for (let i = 1; i < 11; i++) {
@@ -39,7 +38,7 @@ export default function App() {
         <h1>Tenzies</h1>
       </div>
       <div>
-        {Winner ? <p className="win">yayy you won</p> : <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>}
+        {Winner ? <img alt="winner" src={img} /> : <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>}
       </div>
       {Winner ? "" : <div className="diceContainer"> {newArr}
       </div>}
