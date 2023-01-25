@@ -1,51 +1,72 @@
-import React from "react"
-import Dice from "./Dice"
-import img from "./winner.png"
-function newDice(arr) {
-  arr = []
-  for (let i = 1; i < 11; i++) {
-    arr.push({
-      value: Math.floor(Math.random() * 6) + 1,
-      hold: false,
-      id: i
-    })
-  }
-  return arr
-}
+import React from "react";
+import Dice from "./Dice";
 
+const n = 10;
 export default function App() {
-  const [diceNum, setDiceNum] = React.useState(() => newDice([]))
-  function holdDice(id) {
-    setDiceNum(prev => prev.map(obj =>
-      (obj.id === id ? { ...obj, hold: !obj.hold } : obj)
-    ))
-  }
-  let newArr = diceNum.map((element) => <Dice holdDice={holdDice} numId={element.id}
-    value={element.value} hold={element.hold} />)
-  function rollDice() {
-    setDiceNum(prev => prev.map(obj =>
-      (obj.hold ? obj : { ...obj, value: Math.floor(Math.random() * 6) + 1 })
-    ))
-  }
-  function newGame() {
-    setDiceNum(newDice())
-  }
-  const Winner = diceNum.every((obj) => obj.value === (diceNum[0].value) ? true : false)
+  const [dice, setDice] = React.useState(allNewDice());
 
+  function allNewDice() {
+    let newDice = [];
+    for (let i = 0; i < n; i++) {
+      newDice.push({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: i + 1,
+      });
+    }
+    return newDice;
+  }
+  function ResetDice() {
+    let first = dice[0].value;
+    let allHeld = dice.every((die) => die.isHeld === true);
+    let allSame = dice.every((die) => die.value === first);
+    if (allHeld && allSame) {
+      return true;
+    }
+    return false;
+  }
+  function RollDice() {
+    if (ResetDice()) {
+      setDice((prev) =>
+        prev.map((die) => {
+          return {
+            ...die,
+            value: Math.ceil(Math.random() * 6),
+            isHeld: false,
+          };
+        })
+      );
+    } else {
+      setDice((prev) =>
+        prev.map((die) =>
+          !die.isHeld ? { ...die, value: Math.ceil(Math.random() * 6) } : die
+        )
+      );
+    }
+  }
+  function holdDice(_id) {
+    setDice((prev) =>
+      prev.map((die) =>
+        die.id === _id ? { ...die, isHeld: !die.isHeld } : die
+      )
+    );
+  }
+  const diceElements = dice.map((die) => {
+    return <Dice key={die.id} num={die} holdDice={holdDice} />;
+  });
   return (
-    <div className="mainBody">
-      <div>
-        <h1>Tenzies</h1>
-      </div>
-      <div>
-        {Winner ? <img alt="winner" src={img} /> : <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>}
-      </div>
-      {Winner ? "" : <div className="diceContainer"> {newArr}
-      </div>}
-
-      <div>
-        {Winner ? <button onClick={newGame}>New Game</button> : <button onClick={rollDice}>Roll</button>}
+    <div className="shellout">
+      <div className="shellin">
+        <div>
+          <h1>Tenzies</h1>
+          <p>
+            descriptionof tenzies roll the dice til u get wgatever vlick iufb
+            just typing random stuff
+          </p>
+        </div>
+        <div className="dice-container">{diceElements}</div>
+        <button onClick={RollDice}>{ResetDice() ? "Reset" : "Roll"}</button>
       </div>
     </div>
-  )
+  );
 }
