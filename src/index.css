@@ -34,12 +34,22 @@ p {
   width: 80%;
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
-  gap: 5px;
+  gap: 10px;
 }
 
 .dice {
-  color: #2b283a;
+  color: #0b2434;
   text-align: center;
   font-size: 25px;
   padding-top: 20px;
+  box-shadow: 2px 2px 5px rgb(84, 190, 117);
+  border-radius: 5px;
+}
+button {
+  background-color: #0b2434;
+  color: aliceblue;
+  border-radius: 20%;
+  width: 40%;
+  height: 25px;
+  letter-spacing: 5px;
 }
