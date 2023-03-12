@@ -3,11 +3,8 @@
 }
 .shellout {
   background-color: #0b2434;
-  position: absolute;
   width: 360px;
   height: 379px;
-  left: 76px;
-  top: 69px;
 }
 .shellin {
   position: absolute;
