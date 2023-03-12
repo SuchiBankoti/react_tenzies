@@ -42,7 +42,7 @@ p {
   text-align: center;
   font-size: 25px;
   padding-top: 20px;
-  box-shadow: 2px 2px 5px rgb(84, 190, 117);
+  box-shadow: 2px 2px 5px #80eba7;
   border-radius: 5px;
 }
 button {
