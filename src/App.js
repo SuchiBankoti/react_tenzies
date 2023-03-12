@@ -60,8 +60,8 @@ export default function App() {
         <div>
           <h1>Tenzies</h1>
           <p>
-            descriptionof tenzies roll the dice til u get wgatever vlick iufb
-            just typing random stuff
+            Roll the dice and select the digits, keep rolling untill you get the
+            same digit on every dice
           </p>
         </div>
         <div className="dice-container">{diceElements}</div>
